@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Usuarios</h1>
+</div>
+
+<div class="row bt-3 mb-3">
+    <div class="col-12 text-right">
+        <button id="btnAgregarNuevo" type="button" class="btn btn-primary"><i class="fas fa-fw fa-plus"></i> Agregar</button>
+    </div>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4 shadow-lg table-responsive-sm">
+            <div class="card-body ">
+                <table id="tablaUsuarios" class="table table-sm table-bordered table-striped ">
+                   
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal nuevo usuario -->
+<div id="modalNuevoUsuario" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nuevo Usuario</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form class="row g-3 mb-3">
+
+
+                    <div class="col-md-3">
+                        <label for="vDNI" class="form-label">DNI</label>
+                        <input type="text" class="form-control" id="vDNI">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="vNombres" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" id="vNombres">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="vApellidoPaterno" class="form-label">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="vApellidoPaterno">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="vApellidoMaterno" class="form-label">Apellido Materno</label>
+                        <input type="text" class="form-control" id="vApellidoMaterno">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="vCorreo" class="form-label">vCorreo</label>
+                        <input type="text" class="form-control" id="vCorreo">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="vUsuario" class="form-label">vUsuario</label>
+                        <input type="text" class="form-control" id="vUsuario">
+                    </div>
+                    <div class="col-12 mb-2"><hr /></div>
+                </form>
+                <div class="mb-3">
+                    <button id="btnGuardarNuevo" type="button" class="btn btn-block btn-primary"><i class="fas fa-fw fa-save"></i> Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /modal nuevo usuario -->
+<!-- modal editar usuario -->
+<div id="modalEditarUsuario" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Usuario</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="vUsuarioEditar" class="form-label">vUsuario</label>
+                        <input type="text" class="form-control" id="vUsuarioEditar">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="vCorreoEditar" class="form-label">vCorreo</label>
+                        <input type="text" class="form-control" id="vCorreoEditar">
+                    </div>
+                    <div class="col-12 mb-2"><hr /></div>
+                    <div class="col-md-3">
+                        <label for="vDNIEditar" class="form-label">DNI</label>
+                        <input type="text" class="form-control" id="vDNIEditar">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="vNombresEditar" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" id="vNombresEditar">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="vApellidoPaternoEditar" class="form-label">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="vApellidoPaternoEditar">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="vApellidoMaternoEditar" class="form-label">Apellido Materno</label>
+                        <input type="text" class="form-control" id="vApellidoMaternoEditar">
+                        <input type="hidden" id="usuarioIDEditar">
+                    </div>
+                </form>
+                <div class="mb-3">
+                    <button id="btneditarUsuario" type="button" class="btn btn-block btn-primary"><i class="fas fa-fw fa-save"></i> Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /modal editar usuario -->
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="~/Scripts/Usuarios/Usuarios.js"></script>

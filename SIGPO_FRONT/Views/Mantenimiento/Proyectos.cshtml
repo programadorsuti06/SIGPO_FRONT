@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewBag.Title = "Proyectos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    /* Estilos para el checkbox personalizado */
+    .checkbox-container {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+        text-align: center; /* Centrar el contenido */
+    }
+
+    .styled-checkbox {
+        opacity: 0; /* Ocultar el checkbox original */
+        position: absolute;
+    }
+
+        .styled-checkbox + span {
+            position: relative;
+            display: inline-block;
+            width: 24px; /* Aumentar el tamaño del checkbox */
+            height: 24px; /* Aumentar el tamaño del checkbox */
+            border: 1px solid #333;
+            border-radius: 3px;
+            background-color: #fff;
+            vertical-align: middle;
+            margin-right: 5px;
+            line-height: 24px; /* Centrar verticalmente el símbolo de verificación */
+        }
+
+        .styled-checkbox:checked + span::after {
+            content: '\2713';
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            line-height: 24px; /* Centrar verticalmente el símbolo de verificación */
+            color: #fff;
+            background-color: #55a5ff;
+            border-radius: 2px;
+        }
+</style>
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Proyectos</h1>
+</div>
+
+<div class="row bt-3 mb-3">
+    <div class="col-12 text-right">
+        <button id="btnAgregarNuevo" type="button" class="btn btn-primary"><i class="fas fa-fw fa-plus"></i> Agregar</button>
+    </div>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4 shadow-lg table-responsive-sm">
+            <div class="card-body ">
+                <table id="tablaProyectos" class="table table-sm table-bordered table-striped ">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal nuevo Proyecto -->
+<div id="modalNuevoProyecto" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Registrar Proyecto</h3>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form class="row g-3 mb-3">
+
+                    <div class="col-md-12">
+                        <label for="vNombreProyecto" class="form-label">Nombre del Proyecto</label>
+                        <input type="text" class="form-control" id="vNombreProyecto">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="vCUI" class="form-label">CUI</label>
+                        <input type="text" class="form-control" id="vCUI">
+                    </div>
+
+                    <div class="col-md-9">
+                        <label for="cmbUnidadOrga" class="form-label">Unidad Formuladora</label>
+
+                        <select id="cmbUnidadOrga" class="form-select" aria-label="Default select example">
+                            <option selected>Seleccione</option>
+
+                        </select>
+                    </div>
+                    <h6 class="h6 mb-0 text-gray-800">Seleccione el Ambito de accion del proyecto</h6>
+
+                    <div class="col-md-4">
+                        <div class="table-responsive" style="height: 200px; overflow-y: auto;">
+                            <table id="tablaDepartamento" class="table table-sm table-bordered table-striped">
+                                <thead style="position: sticky; top: 0; background-color: #fff; z-index: 1;">
+                                    <tr>
+                                        <th>Departamento</th>
+                                        <th class="text-center">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cuerpoDepartamento" style="position: sticky; top: 40px; background-color: #fff;">
+                                    <!-- Aquí se agregarán las filas dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="table-responsive" style="height: 200px; overflow-y: auto;">
+                            <table id="tablaProvincia" class="table table-sm table-bordered table-striped">
+                                <thead style="position: sticky; top: 0; background-color: #fff; z-index: 1;">
+                                    <tr>
+                                        <th>Provincia</th>
+                                        <th class="text-center">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cuerpoProvincia" style="position: sticky; top: 40px; background-color: #fff;">
+                                    <!-- Aquí se agregarán las filas dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="table-responsive" style="height: 200px; overflow-y: auto;">
+                            <table id="tablaDistrito" class="table table-sm table-bordered table-striped">
+                                <thead style="position: sticky; top: 0; background-color: #fff; z-index: 1;">
+                                    <tr>
+                                        <th>Distrito</th>
+                                        <th class="text-center">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cuerpoDistrito" style="position: sticky; top: 40px; background-color: #fff;">
+                                    <!-- Aquí se agregarán las filas dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-2"><hr /></div>
+                </form>
+                <div class="mb-3">
+                    <button id="btnGuardarNuevo" type="button" class="btn btn-block btn-primary"><i class="fas fa-fw fa-save"></i> Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /modal nuevo usuario -->
+<!-- modal editar usuario -->
+<div id="modalEditarUsuario" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Usuario</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="vUsuarioEditar" class="form-label">vUsuario</label>
+                        <input type="text" class="form-control" id="vUsuarioEditar">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="vCorreoEditar" class="form-label">vCorreo</label>
+                        <input type="text" class="form-control" id="vCorreoEditar">
+                    </div>
+                    <div class="col-12 mb-2"><hr /></div>
+                    <div class="col-md-3">
+                        <label for="vDNIEditar" class="form-label">DNI</label>
+                        <input type="text" class="form-control" id="vDNIEditar">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="vNombresEditar" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" id="vNombresEditar">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="vApellidoPaternoEditar" class="form-label">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="vApellidoPaternoEditar">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="vApellidoMaternoEditar" class="form-label">Apellido Materno</label>
+                        <input type="text" class="form-control" id="vApellidoMaternoEditar">
+                        <input type="hidden" id="usuarioIDEditar">
+                    </div>
+                </form>
+                <div class="mb-3">
+                    <button id="btneditarUsuario" type="button" class="btn btn-block btn-primary"><i class="fas fa-fw fa-save"></i> Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /modal editar usuario -->
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="~/Scripts/Mantenimiento/Proyectos.js"></script>
+
