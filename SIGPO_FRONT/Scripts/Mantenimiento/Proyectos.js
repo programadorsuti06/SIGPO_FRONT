@@ -125,11 +125,26 @@ let eventos = function () {
 
    
     //OBTENER DATOS DE EXCEL
-    
+    //$('#seleccionarArchivoBtn').click( function (e) {
+    //    if ($('#vNombreProyecto').val() === "") {// || $('#vCUI').val() === "" || $('#cmbUnidadOrga').val() === 0) {
+                     
+    //        Swal.fire({
+    //            title: 'Error!',
+    //            text: 'Debe completar todos los campos antes de seleccionar un archivo',
+    //            icon: 'error'
+    //        });
+           
+    //        $('#vNombreProyecto').focus();
+    //        return;
+            
+    //    } 
+    //});
+ 
     document.getElementById('archivo').addEventListener('change', function (e) {
+        
         var file = e.target.files[0];
         var reader = new FileReader();
-        console.log(file.name);
+       
         reader.onload = function (e) {
             var data = new Uint8Array(e.target.result);
             var workbook = XLSX.read(data, { type: 'array' });
@@ -138,33 +153,69 @@ let eventos = function () {
             var sheet = workbook.Sheets[sheetName];
              jsonData = XLSX.utils.sheet_to_json(sheet);
 
-            
-            var Componentes = [];
-            var Acciones = [];
-            var Actividades = [];
-            var SubActividades = [];
+
+            var proyecto = {
+                vNomProyecto: $("#vNombreProyecto").val(),
+                vCUI: $("#vCUI").val(),
+                iCodUnidadFormuladora: $('#cmbUnidadOrga').val(),
+                iCodUnidadZonalEjecutora: $('#cmbUnidadOrga').val(),
+                iCodUsuarioRegistra: 1,
+                componentes: []
+            };
 
             for (var i = 0; i < jsonData.length; i++) {
-                if (jsonData[i].ITEM.toString().length === 1) {
-                    Componentes.push(jsonData[i]);
-                }
-                if (jsonData[i].ITEM.toString().length === 3) {
-                    Acciones.push(jsonData[i]);
-                }
-                if (jsonData[i].ITEM.toString().length === 5) {
-                    Actividades.push(jsonData[i]);
-                }
-                if (jsonData[i].ITEM.toString().length === 7) {
-                    SubActividades.push(jsonData[i]);
-                }
+                var currentItem = jsonData[i].ITEM.toString();
 
+                if (currentItem.length === 1) {
+                    var newComponente = {
+                        vItem: currentItem,
+                        vSec_fun: "",
+                        vDescripcion: jsonData[i].COMPONENTE_ACCION_ACTIVIDAD,
+                        acciones: []
+                    };
+                    proyecto.componentes.push(newComponente);
+                } else if (currentItem.length === 3) {
+                    var componente = proyecto.componentes.find(comp => comp.vItem === currentItem.substring(0, 1));
+                    if (componente) {
+                        var newAccion = {
+                            vItem: currentItem,
+                            vDescripcion: jsonData[i].COMPONENTE_ACCION_ACTIVIDAD,
+                            actividades: []
+                        };
+                        componente.acciones.push(newAccion);
+                    }
+                } else if (currentItem.length === 5) {
+                    var componente = proyecto.componentes.find(comp => comp.vItem === currentItem.substring(0, 1));
+                    if (componente) {
+                        var accion = componente.acciones.find(acc => acc.vItem === currentItem.substring(0, 3));
+                        if (accion) {
+                            var newActividad = {
+                                vItem: currentItem,
+                                vDescripcion: jsonData[i].COMPONENTE_ACCION_ACTIVIDAD,
+                                bActivo: true,
+                                subActividades: []
+                            };
+                            accion.actividades.push(newActividad);
+                        }
+                    }
+                } else if (currentItem.length === 7) {
+                    var componente = proyecto.componentes.find(comp => comp.vItem === currentItem.substring(0, 1));
+                    if (componente) {
+                        var accion = componente.acciones.find(acc => acc.vItem === currentItem.substring(0, 3));
+                        if (accion) {
+                            var actividad = accion.actividades.find(act => act.vItem === currentItem.substring(0, 5));
+                            if (actividad) {
+                                var newSubActividad = {
+                                    vItem: currentItem,
+                                    vDescripcion: jsonData[i].COMPONENTE_ACCION_ACTIVIDAD,
+                                };
+                                actividad.subActividades.push(newSubActividad);
+                            }
+                        }
+                    }
+                }
             }
-            console.log(Componentes);
-            console.log(Acciones);
-            console.log(Actividades);
-            console.log(SubActividades);
 
-            debugger;
             // Mostrar los datos en el DataTable con el idioma español en los controles
       
             if ($.fn.dataTable.isDataTable('#tablaComponentes')) {
@@ -198,11 +249,7 @@ let eventos = function () {
                             "sNext": "Siguiente",
                             "sPrevious": "Anterior"
                         }
-                        //},
-                        //"oAria": {
-                        //    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                        //    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                        //}
+                  
                     }
 
                 });

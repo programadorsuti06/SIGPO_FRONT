@@ -1,7 +1,7 @@
-﻿//let baseUrlApi = 'https://localhost:7123/';
+﻿let baseUrlApi = 'https://localhost:7123/';
 let baseUrlMvc = 'https://localhost:44334/';
 
-let baseUrlApi = 'https://qa.agrorural.gob.pe/SIGPO_API/';
+//let baseUrlApi = 'https://qa.agrorural.gob.pe/SIGPO_API/';
 
 //let baseUrlMvc = 'http://qa.agrorural.gob.pe/SIGPO_FRONT/'
 
