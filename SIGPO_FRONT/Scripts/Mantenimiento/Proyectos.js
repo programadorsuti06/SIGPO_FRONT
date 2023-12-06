@@ -1,8 +1,11 @@
 ﻿var tabla1,tabla2;
-
+var jsonData;
+const modalElement = document.getElementById('modalNuevoProyecto');
 const modalNuevoProyecto = new bootstrap.Modal(document.getElementById('modalNuevoProyecto'), null);
-const modalEditarUsuario = new bootstrap.Modal(document.getElementById('modalEditarUsuario'), null);
+var tablaComponentes = null;
 
+
+//FUNCION PRINCIPAL
 $(function () {
     ui();
     eventos();
@@ -27,7 +30,7 @@ $(function () {
             doTask('POST', url, obj, function (response) {
                 let registros = response.registros
                 console.log(registros)
-                debugger;
+               
                 callback({
                     data: registros,
                     recordsTotal: response.iTotalRegistros,
@@ -66,17 +69,16 @@ $(function () {
         columnDefs: []
     });
 
-    // Reiniciar DataTables Responsive después de cargar la tabla dinámicamente
-   // tabla1.responsive.recalc();
-   // tabla1.responsive.update();
 });
 
 let eventos = function () {
     $("#btnAgregarNuevo").click(function () {
-        $("#vNombreProyecto").val('');
-        $("#vCUI").val('');
+        var formulario = document.getElementById('NuevoProyecto');
+        formulario.reset();
+
         $('#cmbUnidadOrga').empty();
         $('#cmbUnidadOrga').append("<option value='0'>Seleccione</option>");
+       // $('#tablaComponentes').remove();
         var obj = {};
         doTask('GET', "Maestros/listarUnidades/", obj, function (respuesta) {
             $.each(respuesta, function (key, value) {
@@ -86,18 +88,16 @@ let eventos = function () {
             });
            
         });
-        var obj = {};
-        doTask('GET', "Maestros/listarDepartamento/", obj, function (respuesta) {
-           pintarTabla(respuesta,'cuerpoDepartamento');
-        });
-
+       
         //$("#vUsuario").val('');
-        //$("#vCorreo").val('');
-        //$("#vDNI").val('');
-        //$("#vNombres").val('');
-        //$("#vApellidoPaterno").val('');
-        //$("#vApellidoMaterno").val('');
+       
         modalNuevoProyecto.show();
+    });
+
+   
+    $('#btnCerrar').on('click', function () {
+        tablaComponentes.clear().draw();
+        modalNuevoProyecto.hide();
     });
     let iCodUnidad;
     $('#cmbUnidadOrga').on('change', function (e) {
@@ -124,18 +124,120 @@ let eventos = function () {
     });
 
    
+    //OBTENER DATOS DE EXCEL
     
-    function obtenerDataAddUsuario(data) {
+    document.getElementById('archivo').addEventListener('change', function (e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        console.log(file.name);
+        reader.onload = function (e) {
+            var data = new Uint8Array(e.target.result);
+            var workbook = XLSX.read(data, { type: 'array' });
+
+            var sheetName = workbook.SheetNames[0];
+            var sheet = workbook.Sheets[sheetName];
+             jsonData = XLSX.utils.sheet_to_json(sheet);
+
+            
+            var Componentes = [];
+            var Acciones = [];
+            var Actividades = [];
+            var SubActividades = [];
+
+            for (var i = 0; i < jsonData.length; i++) {
+                if (jsonData[i].ITEM.toString().length === 1) {
+                    Componentes.push(jsonData[i]);
+                }
+                if (jsonData[i].ITEM.toString().length === 3) {
+                    Acciones.push(jsonData[i]);
+                }
+                if (jsonData[i].ITEM.toString().length === 5) {
+                    Actividades.push(jsonData[i]);
+                }
+                if (jsonData[i].ITEM.toString().length === 7) {
+                    SubActividades.push(jsonData[i]);
+                }
+
+            }
+            console.log(Componentes);
+            console.log(Acciones);
+            console.log(Actividades);
+            console.log(SubActividades);
+
+            debugger;
+            // Mostrar los datos en el DataTable con el idioma español en los controles
       
-    };
+            if ($.fn.dataTable.isDataTable('#tablaComponentes')) {
+                tablaComponentes.destroy();
+               
+            } 
+
+                tablaComponentes = $('#tablaComponentes').DataTable({
+                    scrollY: '200px',
+                    select: 'single',
+                    data: jsonData,
+                    columns: Object.keys(jsonData[0]).map(function (key) {
+                        return { data: key, title: key };
+                    }),
+                    language: {
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron resultados",
+                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+                        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Buscar:",
+                        "sUrl": "",
+                        "sInfoThousands": ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        }
+                        //},
+                        //"oAria": {
+                        //    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        //    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        //}
+                    }
+
+                });
+            
+        };
+
+        reader.readAsArrayBuffer(file);
+
+    });
 
    
-
-
+   
 };
 
 let ui = function () {
+    // Agregar el evento click para la edición en la tabla
+   
 };
+
+function editarRegistro(id) {
+    // Encontrar el índice del registro en el array 'jsonData' basado en su ID
+    var indice = jsonData.findIndex(function (item) {
+        return item.ID === id;
+    });
+
+    if (indice !== -1) {
+        var registroEditar = jsonData[indice];
+
+        // Aquí puedes acceder a las propiedades del registro y mostrarlas
+        console.log('Detalles del registro a editar:');
+        console.log(registroEditar);
+    } else {
+        console.log('Registro no encontrado');
+    }
+}
 
 function pintarTabla(datos,tabla) {
     limpiarTabla(tabla);
