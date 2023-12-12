@@ -3,45 +3,22 @@
     ViewBag.Title = "Proyectos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <style>
-    /* Estilos para el checkbox personalizado */
-    .checkbox-container {
-        position: relative;
-        display: inline-block;
-        vertical-align: middle;
-        cursor: pointer;
-        text-align: center; /* Centrar el contenido */
+
+    #miLista {
+        max-height: 200px; /* Altura máxima inicial */
+        overflow-y: auto; /* Habilita el scroll vertical */
     }
 
-    .styled-checkbox {
-        opacity: 0; /* Ocultar el checkbox original */
-        position: absolute;
+    #miLista2 {
+        max-height: 200px; /* Altura máxima inicial */
+        overflow-y: auto; /* Habilita el scroll vertical */
     }
 
-        .styled-checkbox + span {
-            position: relative;
-            display: inline-block;
-            width: 24px; /* Aumentar el tamaño del checkbox */
-            height: 24px; /* Aumentar el tamaño del checkbox */
-            border: 1px solid #333;
-            border-radius: 3px;
-            background-color: #fff;
-            vertical-align: middle;
-            margin-right: 5px;
-            line-height: 24px; /* Centrar verticalmente el símbolo de verificación */
-        }
-
-        .styled-checkbox:checked + span::after {
-            content: '\2713';
-            display: block;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            line-height: 24px; /* Centrar verticalmente el símbolo de verificación */
-            color: #fff;
-            background-color: #55a5ff;
-            border-radius: 2px;
-        }
+    .selected {
+        background-color: #91aade; /* Color de fondo verde */
+    }
 </style>
 
 <!-- Page Heading -->
@@ -68,47 +45,44 @@
 </div>
 
 <!-- modal nuevo Proyecto -->
-<div id="modalNuevoProyecto" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+<div id="modalNuevoProyecto" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Registrar Proyecto</h3>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <!-- Botón de cierre -->
+                <button id="btnCerrar" type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <div class="modal-body">
-                <form class="row g-3 mb-3">
+                <form id="NuevoProyecto" class="row g-3 mb-3">
 
                     <div class="col-md-12">
-                        <label for="vNombreProyecto" class="form-label">Nombre del Proyecto</label>
+                        <label for="vNombreProyecto" class="form-label font-weight-bold">Nombre del Proyecto</label>
                         <input type="text" class="form-control" id="vNombreProyecto">
                     </div>
                     <div class="col-md-3">
-                        <label for="vCUI" class="form-label">CUI</label>
+                        <label for="vCUI" class="form-label font-weight-bold">CUI</label>
                         <input type="text" class="form-control" id="vCUI">
                     </div>
 
                     <div class="col-md-9">
-                        <label for="cmbUnidadOrga" class="form-label">Unidad Organizacional</label>
-
+                        <label for="cmbUnidadOrga" class="form-label font-weight-bold">Unidad Formuladora</label>
                         <select id="cmbUnidadOrga" class="form-select" aria-label="Default select example">
                             <option selected>Seleccione</option>
 
                         </select>
                     </div>
-                    <h6 class="h6 mb-0 text-gray-800">Seleccione las Unidades Zonales asociadas al proyecto</h6>
-                   
-                    <div class="table-responsive" style="height: 200px; overflow-y: auto;">
-                        <table id="tablaUnidadZonal" class="table table-sm table-bordered table-striped">
-                            <thead style="position: sticky; top: 0; background-color: #fff; z-index: 1;">
-                                <tr>
-                                    <th>Unidad Zonal</th>
-                                    <th class="text-center">Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody id="cuerpoTabla" style="position: sticky; top: 40px; background-color: #fff;">
-                                <!-- Aquí se agregarán las filas dinámicamente -->
-                            </tbody>
+                    <div class="mb-12">
+                        <div class="mb-3">
+                            <label for="archivo" class="form-label font-weight-bold">Seleccionar Archivo de Componentes/Acciones/Actividades</label>
+                            <input type="file" class="form-control" id="archivo" name="archivo" accept=".xls,.xlsx">
+                            <small class="text-muted">Solo se permiten archivos Excel (.xls, .xlsx)</small>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="tablaComponentes" class="table table-sm table-bordered table-striped ">
                         </table>
                     </div>
 
@@ -121,53 +95,191 @@
         </div>
     </div>
 </div>
-<!-- /modal nuevo usuario -->
-<!-- modal editar usuario -->
-<div id="modalEditarUsuario" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+
+<!-- modal agregar ambito -->
+<div id="modalAgregarAmbito" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Editar Usuario</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Registrar Ámbito</h3>
+                <!-- Botón de cierre -->
+                <button id="btnCerrar" type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <div class="modal-body">
                 <form class="row g-3 mb-3">
-                    <div class="col-md-6">
-                        <label for="vUsuarioEditar" class="form-label">vUsuario</label>
-                        <input type="text" class="form-control" id="vUsuarioEditar">
+
+                    <div class="col-md-12">
+                        <label for="vNombre" class="form-label font-weight-bold">Nombre del Proyecto</label>
+                        <input type="text" class="form-control" id="vNombre">
                     </div>
-                    <div class="col-md-6">
-                        <label for="vCorreoEditar" class="form-label">vCorreo</label>
-                        <input type="text" class="form-control" id="vCorreoEditar">
+                    <div class="col-md-3">
+                        <label for="vCui" class="form-label font-weight-bold">CUI</label>
+                        <input type="text" class="form-control" id="vCui">
                     </div>
+
+                    <div class="col-md-9">
+                        <label for="vUnidadFormuladora" class="form-label font-weight-bold">Unidad Formuladora</label>
+                        <input type="text" class="form-control" id="vUnidadFormuladora">
+                    </div>
+
+                    <label class="form-label font-weight-bold">Ámbito de Acción</label>
+                    <div class="col-md-3">
+                        <div class="col-md-12">
+                            <label for="cmbUnidadEjecutora" class="form-label font-weight-bold">Unidad Zonal Ejecutora</label>
+                            <select id="cmbUnidadEjecutora" class="form-select" aria-label="Default select example">
+                                <option selected>Seleccione</option>
+
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="cmbDepartamento" class="form-label font-weight-bold">Departamento</label>
+                            <select id="cmbDepartamento" class="form-select" aria-label="Default select example">
+                                <option selected>Seleccione</option>
+
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="cmbProvincia" class="form-label font-weight-bold">Provincia</label>
+                            <select id="cmbProvincia" class="form-select" aria-label="Default select example">
+                                <option selected>Seleccione</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="container">
+                            <h5>Distritos</h5>
+                            <div class="card">
+                                <ul class="list-group" id="miLista">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 d-flex justify-content-center align-items-center">
+                        <div class="d-flex flex-column">
+                            <button id="botonMover" class="btn btn-sm btn-primary" type="button">>></button>
+                            <button id="botonQuitar" class="btn btn-sm btn-primary" type="button"><<</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="container">
+                            <h5 id="nDistritos">(#) Distritos Agregados</h5>
+                            <div class="card">
+                                <ul class="list-group" id="miLista2">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="col-12 mb-2"><hr /></div>
-                    <div class="col-md-3">
-                        <label for="vDNIEditar" class="form-label">DNI</label>
-                        <input type="text" class="form-control" id="vDNIEditar">
-                    </div>
-                    <div class="col-md-3">
-                        <label for="vNombresEditar" class="form-label">Nombres</label>
-                        <input type="text" class="form-control" id="vNombresEditar">
-                    </div>
-                    <div class="col-md-3">
-                        <label for="vApellidoPaternoEditar" class="form-label">Apellido Paterno</label>
-                        <input type="text" class="form-control" id="vApellidoPaternoEditar">
-                    </div>
-                    <div class="col-md-3">
-                        <label for="vApellidoMaternoEditar" class="form-label">Apellido Materno</label>
-                        <input type="text" class="form-control" id="vApellidoMaternoEditar">
-                        <input type="hidden" id="usuarioIDEditar">
-                    </div>
                 </form>
                 <div class="mb-3">
-                    <button id="btneditarUsuario" type="button" class="btn btn-block btn-primary"><i class="fas fa-fw fa-save"></i> Guardar</button>
+                    <button id="btnGuardarAmbito" type="button" class="btn btn-block btn-primary"><i class="fas fa-fw fa-save"></i> Guardar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- /modal editar usuario -->
-<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-<script src="~/Scripts/Mantenimiento/Proyectos.js"></script>
+
+<div id="modalVerAmbito" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Lista de Distritos Registrados</h3>
+                <!-- Botón de cierre -->
+                <button id="btnCerrar" type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form class="row g-3 mb-3">
+
+                    <div class="col-md-12">
+                        <label for="vNombreA" class="form-label font-weight-bold">Nombre del Proyecto</label>
+                        <input type="text" class="form-control" id="vNombreA">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="vCuiA" class="form-label font-weight-bold">CUI</label>
+                        <input type="text" class="form-control" id="vCuiA">
+                    </div>
+
+                    <div class="col-md-9">
+                        <label for="vUnidadFormuladoraA" class="form-label font-weight-bold">Unidad Formuladora</label>
+                        <input type="text" class="form-control" id="vUnidadFormuladoraA">
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-12">
+                            <div class="card mb-4 shadow-lg table-responsive-sm">
+                                <div class="card-body ">
+                                    <table id="tablaAmbito" class="table table-sm table-bordered table-striped ">
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-12 mb-2"><hr /></div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal editarProyecto -->
+<div id="modalEditarProyecto" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Editar Proyecto</h3>
+                <!-- Botón de cierre -->
+                <button id="btnCerrar" type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form  class="row g-3 mb-3">
+
+                    <div class="col-md-12">
+                        <label for="vNombreProyectoEditar" class="form-label font-weight-bold">Nombre del Proyecto</label>
+                        <input type="text" class="form-control" id="vNombreProyectoEditar">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="vCUIEditar" class="form-label font-weight-bold">CUI</label>
+                        <input type="text" class="form-control" id="vCUIEditar">
+                    </div>
+
+                    <div class="col-md-9">
+                        <label for="cmbUnidadFormuladora" class="form-label font-weight-bold">Unidad Formuladora</label>
+                        <select id="cmbUnidadFormuladora" class="form-select" aria-label="Default select example">
+                            <option selected>Seleccione</option>
+
+                        </select>
+                    </div>
+                   
+
+                    <div class="col-12 mb-2"><hr /></div>
+                </form>
+                <div class="mb-3">
+                    <button id="btnEditarProyecto" type="button" class="btn btn-block btn-primary"><i class="fas fa-fw fa-save"></i> Editar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
+    <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+
+    <script src="~/Scripts/Mantenimiento/Proyectos.js"></script>
+
+
+
+
 

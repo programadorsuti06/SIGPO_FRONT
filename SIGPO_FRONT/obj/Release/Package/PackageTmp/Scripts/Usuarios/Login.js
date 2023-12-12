@@ -3,7 +3,7 @@
         "vUsuario": $("#vUsuario").val(),
         "vClave": $("#vClave").val(),
     };
-    doTask('POST', "Login/login", obj, obtenerDataLogin);
+    doTask('POST', "login/login", obj, obtenerDataLogin);
 });
 
 function obtenerDataLogin(data) {
