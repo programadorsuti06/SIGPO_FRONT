@@ -1,0 +1,42 @@
+:root {
+    --green-agro: #04824b;
+    --bs-app-aside-width: 14rem;
+    --bs-app-aside-width-actual: 14rem;
+    --bs-app-aside-gap-start: 0px;
+    --bs-app-aside-gap-end: 0px;
+    --bs-app-aside-gap-top: 0px;
+    --bs-app-aside-gap-bottom: 0px;
+}
+.card {
+    border-radius: 1.15rem;
+    border:none;
+    padding:0;
+}
+.card-shadow {
+    box-shadow: 0 0.25rem 1.125rem rgba(75,70,92,.1);
+}
+.card-body {
+    border-radius: 1.15rem;
+    border: none;
+    padding:0;
+}
+.card-header {
+    border-top-left-radius: 1.15rem!important;
+    border-top-right-radius: 1.15rem!important;
+    border: none;
+    background-color: #fff!important;
+}
+
+.p-l-card{
+    padding-left:1.5rem;
+}
+.p-r-card {
+    padding-right: 1.5rem;
+}
+.p-t-card {
+    padding-top: 1.5rem;
+}
+.p-b-card {
+    padding-bottom: 1.5rem;
+}
+

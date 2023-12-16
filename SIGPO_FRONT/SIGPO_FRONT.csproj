@@ -130,8 +130,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\css\bootstrap.css" />
+    <Content Include="Content\assets\css\mystyle.css" />
     <Content Include="Content\assets\css\sb-admin-2.css" />
     <Content Include="Content\assets\css\sb-admin-2.min.css" />
+    <Content Include="Content\assets\img\favicon-agrorural.png" />
+    <Content Include="Content\assets\img\logo-agrorural-color.png" />
+    <Content Include="Content\assets\img\logo-agrorural.png" />
     <Content Include="Content\assets\img\undraw_posting_photo.svg" />
     <Content Include="Content\assets\img\undraw_profile.svg" />
     <Content Include="Content\assets\img\undraw_profile_1.svg" />

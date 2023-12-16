@@ -3,6 +3,7 @@
         "vUsuario": $("#vUsuario").val(),
         "vClave": $("#vClave").val(),
     };
+    debugger;
     doTask('POST', "login/login", obj, obtenerDataLogin);
 });
 
@@ -30,18 +31,18 @@ function obtenerDataLogin(data) {
             url: $("#urlLoginMVC").val(),
             data: dataObj, //change here....
             success: function (response) {
-                if (response.Respuesta == "OK") {
-                    Swal.fire({
-                        title: 'Éxito!',
-                        text: 'Login correcto',
-                        icon: 'success',
-                        confirmButtonText: 'Ok'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
+                //if (response.Respuesta == "OK") {
+                //    //Swal.fire({
+                //    //    title: 'Éxito!',
+                //    //    text: 'Login correcto',
+                //    //    icon: 'success',
+                //    //    confirmButtonText: 'Ok'
+                //    }).then((result) => {
+                //        if (result.isConfirmed) {
                             location.href = $("#urlHome").val()
-                        };
-                    })
-                }
+                    /*    };*/
+                   /* })*/
+                /*}*/
             },
             error: function () {
                 alert("Error while getting files");

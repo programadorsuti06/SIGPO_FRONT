@@ -9796,15 +9796,15 @@ a:focus {
   display: flex;
 }
 
-#wrapper #content-wrapper {
-  background-color: #f8f9fc;
-  width: 100%;
-  overflow-x: hidden;
-}
+    #wrapper #content-wrapper {
+        background-color: #FEFAF4;
+        width: 100%;
+        overflow-x: hidden;
+    }
 
-#wrapper #content-wrapper #content {
-  flex: 1 0 auto;
-}
+    #wrapper #content-wrapper #content {
+        flex: 1 0 auto;
+    }
 
 .container,
 .container-fluid,
@@ -9900,9 +9900,9 @@ a:focus {
 }
 
 .bg-gradient-primary {
-  background-color: #4e73df;
-  background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
-  background-size: cover;
+    background-color: #4e73df;
+    background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+    /*background-color: #F8F6F2;*/
 }
 
 .bg-gradient-secondary {
@@ -10449,15 +10449,16 @@ a:focus {
 }
 
 .sidebar .sidebar-brand {
-  height: 4.375rem;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 800;
-  padding: 1.5rem 1rem;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.05rem;
-  z-index: 1;
+    /*height: 4.375rem;*/
+    text-decoration: none;
+    padding: 0.5rem 2rem;
+    text-align: center;
+    font-weight: 800;
+    /*font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.05rem;*/
+    z-index: 1;
 }
 
 .sidebar .sidebar-brand .sidebar-brand-icon i {
@@ -10682,7 +10683,7 @@ a:focus {
 }
 
 .sidebar-dark hr.sidebar-divider {
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.95);
 }
 
 .sidebar-dark .sidebar-heading {

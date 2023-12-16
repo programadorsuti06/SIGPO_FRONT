@@ -4,17 +4,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">METAS FÍSICAS - PERÍODO 2023</h1>
+<div class="d-sm-flex align-items-center justify-content-center mb-4">
+    <h1 class="h3 mb-0 text-gray-800 ">REGISTRO DE METAS FÍSICAS</h1>
 </div>
 
-<div class="row bt-3 mb-3">
-    <div class="col-12 text-right">
-        <button id="btnAgregarNuevo" type="button" class="btn btn-primary"><i class="fas fa-fw fa-plus"></i> Agregar</button>
-    </div>
-</div>
+@*<div class="row bt-3 mb-3">
+        <div class="col-12 text-right">
+            <button id="btnAgregarNuevo" type="button" class="btn btn-primary"><i class="fas fa-fw fa-plus"></i> Agregar</button>
+        </div>
+    </div>*@
 
 <!-- Content Row -->
 <div class="row">
@@ -22,64 +21,27 @@
         <div class="card mb-4 shadow-lg">
             <div class="card-body">
                 <form class="row g-3 mb-2">
-                    <div class="col-md-3">
-                        <label for="cmbPeriodo" class="form-label">Periodo</label>
-                        <select id="cmbPeriodo" class="form-select" aria-label="Default select example">
-                            <option selected>Seleccione</option>
-                        </select>
+                    <div class=" row justify-content-center">
+                        <div class="col-10 mt-5">
+                            <div class="col-md-2">
+                                <label for="vCui" class="form-label font-weight-bold">CUI</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="vCui" placeholder="Ingresar CUI" required>
+                                    <div class="input-group-append">
+                                        <button id="btnBuscar" class="btn btn-outline-secondary" type="button">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <label for="cmbDepartamento" class="form-label">Unidad Zonal</label>
-                        <select id="cmbDepartamento" class="form-select" aria-label="Default select example">
-                            <option selected>Seleccione</option>
-
-                        </select>
+                    <div class=" row justify-content-center">
+                        <div class="col-10 ">
+                            <table id="tablaProyectos" class="table table-sm table-bordered table-striped">
+                            </table>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <label for="cmbComponente" class="form-label">Componente</label>
-                        <select id="cmbComponente" class="form-select" aria-label="Default select example">
-                            <option selected>Seleccione</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="cmbAcciones" class="form-label">Acción</label>
-                        <select id="cmbAcciones" class="form-select" aria-label="Default select example">
-                            <option selected>Seleccione</option>
-
-                        </select>
-                    </div>
-
-                    <div class="col-12 mb-2"><hr /></div>
-                    <table id="tablaMetasFisica" class="table table-sm table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Período</th>
-                                <th>Componente</th>
-                                <th>Acción</th>
-                                <th>Actividad</th>
-                                <th>Unidad de medida</th>
-                                <th>Meta</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Aquí agregarás las filas con los datos -->
-                            <tr>
-                                <td>2023</td>
-                                <td>Componente 1</td>
-                                <td>Acción 1</td>
-                                <td>Actividad</td>
-                                <td>Unidad 1</td>
-                                <td>5</td>
-                                <td>
-                                    <button style="background-color: green; color: white; border: none; padding: 5px 10px; cursor: pointer;">Editar</button>
-                                    <button style="background-color: red; color: white; border: none; padding: 5px 10px; cursor: pointer;">Eliminar</button>
-                                </td>
-
-                            </tr>
-                            <!-- Agrega más filas según sea necesario -->
-                        </tbody>
-                    </table>
                 </form>
             </div>
         </div>
@@ -88,7 +50,7 @@
 
 <!-- modal nuevo usuario -->
 <div id="modalNuevaMetaFisica" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Registrar Meta Física</h5>
@@ -98,88 +60,34 @@
             <div class="modal-body">
                 <form class="row g-3 mb-3">
                     <div class="col-md-3">
-                        <label for="cmbTipoPersona1" class="form-label">Período</label>
-                        <select id="cmbTipoPersona1" class="form-select" aria-label="Default select example">
+                        <label for="cmbPeriodo" class="form-label">Período</label>
+                        <select id="cmbPeriodo" class="form-select" aria-label="Default select example">
                             <option selected>Seleccione</option>
-                            <option value="unidad1">2023</option>
-                            <option value="unidad2">2024</option>
-                            <option value="unidad3">2025</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label for="cmbTipoPersona1" class="form-label">Unidad Zonal</label>
-                        <select id="cmbTipoPersona1" class="form-select" aria-label="Default select example">
+                        <label for="cmbUnidadZonal" class="form-label">Unidad Zonal</label>
+                        <select id="cmbUnidadZonal" class="form-select" aria-label="Default select example">
                             <option selected>Seleccione</option>
-                            <option value="unidad1">Amazonas</option>
-                            <option value="unidad2">La Libertad</option>
-                            <option value="unidad3">Cajamarca</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label for="cmbTipoPersona1" class="form-label">Componente</label>
-                        <select id="cmbTipoPersona1" class="form-select" aria-label="Default select example">
+                        <label for="cmbComponente" class="form-label">Componente</label>
+                        <select id="cmbComponente" class="form-select" aria-label="Default select example">
                             <option selected>Seleccione</option>
-                            <option value="unidad1">MEJORAR EL MANEJO AGRONÓMICO DE LOS CULTIVOS</option>
-                            <option value="unidad2">FORTALECIMIENTO DE LA CAPACIDAD DE PLANIFICACIÓN DE PRODUCTORES</option>
-                            <option value="unidad3">MEJORA DE CAPACIDADES PARA ACCEDER AL CRÉDITO </option>
-                            <option value="unidad3">DESARROLLO DE PRODUCTOS AGRÍCOLAS PARA SU ACCESO A LOS MERCADOS.</option>
+
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label for="cmbTipoPersona1" class="form-label">Acción</label>
-                        <select id="cmbTipoPersona1" class="form-select" aria-label="Default select example">
+                        <label for="cmbAcciones" class="form-label">Acción</label>
+                        <select id="cmbAcciones" class="form-select" aria-label="Default select example">
                             <option selected>Seleccione</option>
-                            <option value="unidad1">a.	Fortalecimiento en el uso y manejo de insumos</option>
-                            <option value="unidad2">b.	Fortalecimiento en el manejo técnico del cultivo</option>
-                            <option value="unidad3">c.	Desarrollo de prácticas mecánico estructurales de conservación de aguas y suelos en la parcela</option>
+
                         </select>
                     </div>
                     <div class="container">
-                        <table border="1" class="table table-sm table-bordered table-striped" >
-                            <thead>
-                                <tr class="justify-content-center">
-                                    <th scope="col" class="col-6">Actividades</th>
-                                    <th scope="col" class="col-2 text-center">Unidad de Medida</th>
-                                    <th scope="col" class="col-1 text-center">Meta</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Ejemplo de una fila, agrega más según sea necesario -->
-                                <tr>
-                                    <td class="col-6">Actividad 1</td>
-                                    <td class="col-2 text-center">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option value="unidad1">N° Visitas</option>
-                                            <option value="unidad2">N° Charlas</option>
-                                            <option value="unidad3">N° Informes</option>
-                                        </select>
-                                    </td>
-                                    <td class="col-1 text-center"><input type="text" class="form-control" placeholder="Ingrese la meta"></td>
-                                </tr>
-                                <tr>
-                                    <td class="col-6">Actividad 2</td>
-                                    <td class="col-2 text-center">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option value="unidad1">N° Visitas</option>
-                                            <option value="unidad2">N° Charlas</option>
-                                            <option value="unidad3">N° Informes</option>
-                                        </select>
-                                    </td>
-                                    <td class="col-1 text-center"><input type="text" class="form-control" placeholder="Ingrese la meta"></td>
-                                </tr>
-                                <tr>
-                                    <td class="col-6">Actividad 3</td>
-                                    <td class="col-2 text-center">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option value="unidad1">N° Visitas</option>
-                                            <option value="unidad2">N° Charlas</option>
-                                            <option value="unidad3">N° Informes</option>
-                                        </select>
-                                    </td>
-                                    <td class="col-1 text-center"><input type="text" class="form-control" placeholder="Ingrese la meta"></td>
-                                </tr>
-                                <!-- Agrega más filas según sea necesario -->
-                            </tbody>
+                        <table id="tablaActividad" border="1" class="table table-sm table-bordered table-striped">
+                           
                         </table>
                     </div>
                 </form>
@@ -236,7 +144,11 @@
         </div>
     </div>
 </div>
-<!-- /modal editar usuario -->
 
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
 <script src="~/Scripts/Planificacion/MetasFisicas.js"></script>
 

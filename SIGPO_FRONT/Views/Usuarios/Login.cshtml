@@ -3,83 +3,141 @@
     Layout = null;
 }
 
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
+    <meta name="keywords" content="">
     <meta name="author" content="">
-
-    <title>Login - SIGPO</title>
+    <link rel="icon" type="image/png" href="~/Content/assets/img/favicon-agrorural.png">
+    <link rel="apple-touch-icon" href="~/Content/assets/img/favicon-agrorural.png">
+    <title>.:: SIGPO ::.</title>
 
     <!-- Custom fonts for this template-->
     <link href="~/Content/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-          rel="stylesheet">
-
-    <!-- Custom styles for this template-->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="~/Content/assets/css/sb-admin-2.min.css" rel="stylesheet">
-
     <link href="~/Scripts/HoldOn/HoldOn.min.css" rel="stylesheet" type="text/css" />
 
+    <style>
+        :root {
+            --green-agro: #04824b;
+        }
+
+        body {
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        }
+
+        .main {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .container_form {
+            max-width: 400px;
+            background-color: #fff;
+            padding: 2rem 1.8rem 1.8rem 1.7rem;
+            border-radius: calc(1.3rem - 1px);
+            /*filter: drop-shadow(0px 12px 68px rgba(0, 0, 0, .14));*/
+            box-shadow: 0px 28px 81px -7px rgba(0,0,0, 0.25);
+            transition: 0.3s;
+        }
+
+        .form-control {
+            border-radius: 5rem;
+            border: 1px solid transparent;
+            transition: 0.3s;
+            min-height: calc(1.5em + 1.15rem + 2px);
+            padding: 0.7rem 1.5rem 1rem 1.5rem;
+            font-size: 1.15rem;
+            /*color: #1cc88a;*/
+            color: var(--green-agro);
+            box-sizing: border-box;
+            background-color: #ddf7e9;
+        }
+
+            .form-control:hover {
+                /*color: #17C653;*/
+                color: var(--green-agro);
+                border-color: rgba(28, 200, 138, 0.9);
+                outline: 0;
+                box-shadow: none;
+                background-color: #fff;
+            }
+
+            .form-control:focus {
+                /*color: #17C653;*/
+                color: var(--green-agro);
+                border: solid 1px #1cc88a;
+                outline: 0;
+                box-shadow: none;
+            }
+
+            .form-control::placeholder {
+                /*color: #1cc88a;*/
+                color: var(--green-agro);
+            }
+
+        .btn-success {
+            border: none;
+            border-radius: 5rem;
+            font-size: 1.15rem;
+            min-height: calc(1.5em + 1.15rem + 2px);
+        }
+
+        .title {
+            color: var(--green-agro);
+        }
+
+        .bg-points {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.3) 0, rgba(255,255,255,0.3) 1px, transparent 1px) 0 0;
+            background-size: 30px 30px;
+        }
+
+        .container_form:hover {
+            box-shadow: 0px 28px 81px -7px rgba(0,0,0, 0.55);
+        }
+    </style>
 </head>
 
-<body class="bg-gradient-primary">
-
-    <div class="container">
-
-        <!-- Outer Row -->
-        <div class="row justify-content-center mt-5">
-
-            <div class="col-xl-10 col-lg-12 col-md-9">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block">
-                                <img src="https://img.freepik.com/foto-gratis/vista-superior-persona-pelar-maiz-papas_23-2148622461.jpg?q=10&h=200" alt="" style="width: 100%; height: 100%;">
-                            </div>
-                           <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-user"
-                                               id="vUsuario" aria-describedby="emailHelp"
-                                               placeholder="Ingresar usuario de dominio...">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control form-control-user"
-                                               id="vClave" placeholder="Password">
-                                    </div>
-
-                                    <button id="btnLogin" class="btn btn-primary btn-user btn-block">
-                                        Login
-                                    </button>
-                                    <hr>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Descargar Manual de Usuario</a>
-                                    </div>
-                                </div>
-                            </div>
+<body class="bg-gradient-success">
+    <div class="bg-points"></div>
+    <div class="main py-3 py-md-2">
+        <div class="container-fluid mx-auto">
+            <div class="row">
+                <div class="col-12 col-md-12">
+                    <div class="container_form mx-auto">
+                        <!-- codigo aqui -->
+                        <figure class="mx-auto mb-4" style="max-width:250px!important;">
+                            <img class="img-fluid mx-auto" src="~/Content/assets/img/logo-agrorural-color.png" alt="Logo Agrorural" />
+                        </figure>
+                        <h6 class="text-center title">Sistema de Gestión y Planificación Operacional</h6>
+                        <h5 class="text-center title">SIGPO</h5>
+                        <br />
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="vUsuario" name="vUsuario" aria-describedby="emailHelp" placeholder="Usuario" required>
                         </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="vClave" name="vClave" placeholder="Contraseña" required>
+                        </div>
+                        <button id="btnLogin" class="btn btn-success btn-block mt-4">
+                            Iniciar sesión
+                        </button>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 
     @Html.Hidden("urlLoginMVC", Url.Action("Login2", "Usuarios"))
     @Html.Hidden("urlHome", Url.Action("Index", "Home"))

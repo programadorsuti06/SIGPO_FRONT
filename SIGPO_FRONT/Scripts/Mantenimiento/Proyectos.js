@@ -37,7 +37,7 @@ $(function () {
 
             doTask('POST', url, obj, function (response) {
                 let registros = response.registros
-                console.log(registros)
+               
 
                 callback({
                     data: registros,
@@ -84,7 +84,7 @@ $(function () {
                 "targets": 1, // Índice de la columna "Nombre del Proyecto"
                 "width": "900px" // Ancho deseado para la columna
             }
-            // Puedes agregar más definiciones para otras columnas si es necesario
+           
         ]
     });
 });

@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>D:\JEMMY\publicables\SIGPO_FRONT</_PublishTargetUrl>
-    <History>True|2023-12-11T19:35:38.0775957Z;True|2023-12-11T14:33:32.0597311-05:00;True|2023-12-11T12:24:26.5123130-05:00;True|2023-12-11T12:24:20.1478174-05:00;True|2023-12-11T12:21:08.3572466-05:00;True|2023-12-11T12:20:52.8866686-05:00;True|2023-12-11T10:49:25.0927258-05:00;True|2023-12-11T10:49:01.4444509-05:00;True|2023-12-11T10:40:38.4869586-05:00;True|2023-12-11T10:40:18.6123712-05:00;True|2023-12-11T10:38:57.9843041-05:00;True|2023-12-10T21:19:29.5823540-05:00;True|2023-12-10T15:17:48.0916413-05:00;True|2023-12-10T15:17:28.2239505-05:00;True|2023-12-10T13:41:22.5543880-05:00;True|2023-12-08T22:23:12.0424643-05:00;True|2023-12-08T22:01:36.5453959-05:00;True|2023-11-24T08:38:25.1095038-05:00;True|2023-11-23T19:42:42.5225128-05:00;True|2023-11-23T19:37:38.6288502-05:00;True|2023-11-23T19:35:32.2732637-05:00;</History>
+    <History>True|2023-12-13T23:37:03.7285746Z;True|2023-12-12T18:52:16.4653667-05:00;True|2023-12-12T18:50:46.7418900-05:00;True|2023-12-11T14:35:38.0775957-05:00;True|2023-12-11T14:33:32.0597311-05:00;True|2023-12-11T12:24:26.5123130-05:00;True|2023-12-11T12:24:20.1478174-05:00;True|2023-12-11T12:21:08.3572466-05:00;True|2023-12-11T12:20:52.8866686-05:00;True|2023-12-11T10:49:25.0927258-05:00;True|2023-12-11T10:49:01.4444509-05:00;True|2023-12-11T10:40:38.4869586-05:00;True|2023-12-11T10:40:18.6123712-05:00;True|2023-12-11T10:38:57.9843041-05:00;True|2023-12-10T21:19:29.5823540-05:00;True|2023-12-10T15:17:48.0916413-05:00;True|2023-12-10T15:17:28.2239505-05:00;True|2023-12-10T13:41:22.5543880-05:00;True|2023-12-08T22:23:12.0424643-05:00;True|2023-12-08T22:01:36.5453959-05:00;True|2023-11-24T08:38:25.1095038-05:00;True|2023-11-23T19:42:42.5225128-05:00;True|2023-11-23T19:37:38.6288502-05:00;True|2023-11-23T19:35:32.2732637-05:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -124,10 +124,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/27/2016 21:50:24</publishTime>
     </File>
     <File Include="bin/SISGEA_FRONT.dll">
-      <publishTime>12/11/2023 12:42:23</publishTime>
+      <publishTime>12/12/2023 20:34:17</publishTime>
     </File>
     <File Include="bin/SISGEA_FRONT.pdb">
-      <publishTime>12/11/2023 12:42:23</publishTime>
+      <publishTime>12/12/2023 20:34:17</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>11/28/2018 13:04:24</publishTime>
@@ -153,11 +153,26 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 13:57:34</publishTime>
     </File>
+    <File Include="Content/assets/css/bootstrap.css">
+      <publishTime>12/13/2023 08:28:35</publishTime>
+    </File>
+    <File Include="Content/assets/css/mystyle.css">
+      <publishTime>12/13/2023 08:28:35</publishTime>
+    </File>
     <File Include="Content/assets/css/sb-admin-2.css">
-      <publishTime>04/28/2021 20:21:05</publishTime>
+      <publishTime>12/13/2023 08:28:41</publishTime>
     </File>
     <File Include="Content/assets/css/sb-admin-2.min.css">
       <publishTime>10/31/2023 11:53:59</publishTime>
+    </File>
+    <File Include="Content/assets/img/favicon-agrorural.png">
+      <publishTime>12/12/2023 20:45:38</publishTime>
+    </File>
+    <File Include="Content/assets/img/logo-agrorural-color.png">
+      <publishTime>12/12/2023 20:45:38</publishTime>
+    </File>
+    <File Include="Content/assets/img/logo-agrorural.png">
+      <publishTime>12/12/2023 20:45:38</publishTime>
     </File>
     <File Include="Content/assets/img/undraw_posting_photo.svg">
       <publishTime>04/28/2021 20:21:05</publishTime>
@@ -5809,22 +5824,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/03/2023 09:34:01</publishTime>
     </File>
     <File Include="Scripts/Mantenimiento/Proyectos.js">
-      <publishTime>12/11/2023 10:38:33</publishTime>
+      <publishTime>12/13/2023 17:48:45</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.8.3.js">
       <publishTime>03/03/2023 09:34:00</publishTime>
     </File>
     <File Include="Scripts/Planificacion/MetasFisicas.js">
-      <publishTime>11/23/2023 18:13:17</publishTime>
+      <publishTime>12/13/2023 18:36:42</publishTime>
     </File>
     <File Include="Scripts/Usuarios/Login.js">
-      <publishTime>12/10/2023 15:09:41</publishTime>
+      <publishTime>12/13/2023 08:21:38</publishTime>
     </File>
     <File Include="Scripts/Usuarios/Usuarios.js">
       <publishTime>11/10/2023 12:55:43</publishTime>
     </File>
     <File Include="Scripts/Util.js">
-      <publishTime>12/11/2023 14:33:13</publishTime>
+      <publishTime>12/13/2023 11:50:12</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>03/03/2023 09:33:54</publishTime>
@@ -5836,22 +5851,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/03/2023 11:48:55</publishTime>
     </File>
     <File Include="Views/Mantenimiento/Proyectos.cshtml">
-      <publishTime>12/11/2023 14:23:48</publishTime>
+      <publishTime>12/13/2023 16:10:47</publishTime>
     </File>
     <File Include="Views/Planificacion/Index.cshtml">
-      <publishTime>11/13/2023 17:39:11</publishTime>
+      <publishTime>12/13/2023 17:52:47</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>03/03/2023 09:33:54</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/11/2023 14:23:48</publishTime>
+      <publishTime>12/13/2023 08:40:25</publishTime>
     </File>
     <File Include="Views/Usuarios/Index.cshtml">
       <publishTime>11/10/2023 12:49:52</publishTime>
     </File>
     <File Include="Views/Usuarios/Login.cshtml">
-      <publishTime>12/06/2023 08:38:27</publishTime>
+      <publishTime>12/12/2023 20:36:24</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>11/23/2023 09:28:12</publishTime>
@@ -5860,7 +5875,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/03/2023 09:33:54</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/11/2023 12:24:18</publishTime>
+      <publishTime>12/12/2023 18:52:14</publishTime>
     </File>
   </ItemGroup>
 </Project>

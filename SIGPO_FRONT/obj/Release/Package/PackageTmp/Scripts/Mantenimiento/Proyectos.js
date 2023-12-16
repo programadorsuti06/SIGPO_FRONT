@@ -37,7 +37,7 @@ $(function () {
 
             doTask('POST', url, obj, function (response) {
                 let registros = response.registros
-                console.log(registros)
+               
 
                 callback({
                     data: registros,
@@ -84,7 +84,7 @@ $(function () {
                 "targets": 1, // Índice de la columna "Nombre del Proyecto"
                 "width": "900px" // Ancho deseado para la columna
             }
-            // Puedes agregar más definiciones para otras columnas si es necesario
+           
         ]
     });
 });
@@ -130,6 +130,8 @@ let eventos = function () {
 
     //GUARDAR NUEVO PROYECTO  
     $('#btnGuardarNuevo').click(function () {
+        debugger;
+
         if ($('#vNombreProyecto').val() === "") {
             Swal.fire({
                 title: 'Error!',
@@ -174,7 +176,7 @@ let eventos = function () {
                 var newComponente = {
                     vItem: currentItem,
                     vSec_fun: "",
-                    vDescripcion: jsonData[i].COMPONENTE_ACCION_ACTIVIDAD,
+                    vNomComponente: jsonData[i].COMPONENTE_ACCION_ACTIVIDAD,
                     acciones: []
                 };
                 proyecto.componentes.push(newComponente);
@@ -183,7 +185,7 @@ let eventos = function () {
                 if (componente) {
                     var newAccion = {
                         vItem: currentItem,
-                        vDescripcion: jsonData[i].COMPONENTE_ACCION_ACTIVIDAD,
+                        vNomAccion: jsonData[i].COMPONENTE_ACCION_ACTIVIDAD,
                         actividades: []
                     };
                     componente.acciones.push(newAccion);
@@ -195,7 +197,7 @@ let eventos = function () {
                     if (accion) {
                         var newActividad = {
                             vItem: currentItem,
-                            vDescripcion: jsonData[i].COMPONENTE_ACCION_ACTIVIDAD,
+                            vNomActividad: jsonData[i].COMPONENTE_ACCION_ACTIVIDAD,
                             bActivo: true,
                             subActividades: []
                         };
@@ -211,7 +213,7 @@ let eventos = function () {
                         if (actividad) {
                             var newSubActividad = {
                                 vItem: currentItem,
-                                vDescripcion: jsonData[i].COMPONENTE_ACCION_ACTIVIDAD,
+                                vNomSubActividad: jsonData[i].COMPONENTE_ACCION_ACTIVIDAD,
                             };
                             actividad.subActividades.push(newSubActividad);
                         }
@@ -430,7 +432,7 @@ let eventos = function () {
             iCodUnidad: $('#cmbUnidadFormuladora').val()
         };
 
-        doTask('PUT', "Mantenimiento/EditProyecto/", obj, obtenerEditar);
+        doTask('POST', "Mantenimiento/EditProyecto/", obj, obtenerEditar);
         function obtenerEditar(data) {
             Swal.fire({
                 title: 'Éxito!',
@@ -461,7 +463,7 @@ let eventos = function () {
                 var iCodProyecto = rowData.iCodProyecto;
                
                 var obj = {};
-                doTask('DELETE', "Mantenimiento/deleteProyecto/" + iCodProyecto, obj, obtenerDataDeleteAmbito);
+                doTask('POST', "Mantenimiento/deleteProyecto/" + iCodProyecto, obj, obtenerDataDeleteAmbito);
                 function obtenerDataDeleteAmbito(data) {
                     Swal.fire({
                         title: 'Éxito!',
@@ -496,7 +498,7 @@ let eventos = function () {
                 var iCodAmbito = rowData.iCodAmbito;
                 debugger;
                 var obj = {};
-                doTask('DELETE', "Mantenimiento/deleteAmbito/" + iCodAmbito, obj, obtenerDataDeleteAmbito);
+                doTask('POST', "Mantenimiento/deleteAmbito/" + iCodAmbito, obj, obtenerDataDeleteAmbito);
                 function obtenerDataDeleteAmbito(data) {
                     Swal.fire({
                         title: 'Éxito!',
