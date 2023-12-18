@@ -2,4 +2,117 @@
     ViewBag.Title = "Home Page";
 }
 
-<h1>TEST!</h1>
+<!--======================================
+=            PÁGINA PRINCIPAL            =
+=======================================-->
+<!--====  TITULO  ====-->
+<div id="kt_app_toolbar" class="app-toolbar my-4">
+    <div id="kt_app_toolbar_container" class="app-container d-flex align-items-stretch">
+        <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
+            <div class="page-title d-flex flex-column gap-1 me-3">
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold mb-6">
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "Home")" class="text-green-title text-hover-danger">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="text-green-title fw-bold lh-1" style="padding-left:0.5rem">
+                        <i class="fas fa-chevron-right"></i>
+                        Dashboards
+                    </li>
+                </ul>
+
+                <h4 class="page-heading d-flex flex-column justify-content-center text-green-title fw-bolder lh-0 mb-0">
+                    DASHBOARD PROYECTOS
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- evaluar si borrar el col con row-->
+<div class="col-12">
+    <div class="row d-row align-items-stretch">
+
+        <!--====  D1  ====-->
+        <div class="col-xxl-3 col-xl-4">
+            <div class="card b-0">
+                <div class="card-header">
+                    <h3 class="card-title fw-bolder m-0 pl-3">DASHBOARD 1</h3>
+                </div>
+                <div class="card-body pt-1">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <img src="~/Content/assets/img/d1.png" alt="Alternate Text" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--====  D2  ====-->
+        <div class="col-xxl-5 col-xl-4">
+            <div class="card b-0">
+                <div class="card-header">
+                    <h3 class="card-title fw-bolder m-0 pl-3">DASHBOARD 2</h3>
+                </div>
+                <div class="card-body pt-1">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <img src="~/Content/assets/img/d2.png" alt="Alternate Text" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--====  D3  ====-->
+        <div class="col-xxl-4 col-xl-4">
+            <div class="card b-0">
+                <div class="card-header">
+                    <h3 class="card-title fw-bolder m-0 pl-3">DASHBOARD 3</h3>
+                </div>
+                <div class="card-body pt-1">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <img src="~/Content/assets/img/d3.png" alt="Alternate Text" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--====  D4  ====-->
+        <div class="col-xxl-6 col-xl-4">
+            <div class="card b-0">
+                <div class="card-header">
+                    <h3 class="card-title fw-bolder m-0 pl-3">DASHBOARD 4</h3>
+                </div>
+                <div class="card-body pt-1">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <img src="~/Content/assets/img/d4.png" alt="Alternate Text" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--====  D5  ====-->
+        <div class="col-xxl-6 col-xl-4">
+            <div class="card b-0">
+                <div class="card-header">
+                    <h3 class="card-title fw-bolder m-0 pl-3">DASHBOARD 5</h3>
+                </div>
+                <div class="card-body pt-1">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <img src="~/Content/assets/img/d5.png" alt="Alternate Text" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

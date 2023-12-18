@@ -134,6 +134,11 @@
     <Content Include="Content\assets\css\mystyle.css" />
     <Content Include="Content\assets\css\sb-admin-2.css" />
     <Content Include="Content\assets\css\sb-admin-2.min.css" />
+    <Content Include="Content\assets\img\d1.png" />
+    <Content Include="Content\assets\img\d2.png" />
+    <Content Include="Content\assets\img\d3.png" />
+    <Content Include="Content\assets\img\d4.png" />
+    <Content Include="Content\assets\img\d5.png" />
     <Content Include="Content\assets\img\favicon-agrorural.png" />
     <Content Include="Content\assets\img\logo-agrorural-color.png" />
     <Content Include="Content\assets\img\logo-agrorural.png" />
@@ -143,6 +148,7 @@
     <Content Include="Content\assets\img\undraw_profile_2.svg" />
     <Content Include="Content\assets\img\undraw_profile_3.svg" />
     <Content Include="Content\assets\img\undraw_rocket.svg" />
+    <Content Include="Content\assets\js\bootstrap.js" />
     <Content Include="Content\assets\js\demo\chart-area-demo.js" />
     <Content Include="Content\assets\js\demo\chart-bar-demo.js" />
     <Content Include="Content\assets\js\demo\chart-pie-demo.js" />
@@ -2036,6 +2042,7 @@
     <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\Planificacion\Index.cshtml" />
     <Content Include="Views\Mantenimiento\Proyectos.cshtml" />
+    <Content Include="Views\Planificacion\MetasFiscasxPeriodo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

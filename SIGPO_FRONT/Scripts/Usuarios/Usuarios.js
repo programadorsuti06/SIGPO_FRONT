@@ -45,14 +45,8 @@ $(function () {
                 "title": "Acciones", "bSortable": false, "data": null,
                 "render": function (data, type) {
                     return '<div class="d-flex align-items-center">' +
-                        '<button id="btnEditar" data-id="' + data.id + '" type="button" class="btn btn-info btn-icon-split btn-sm d-inline d-sm-none">' +
-                        '<span class="icon text-white-50"><i class="fas fa-pen"></i></span>' +
-                        '</button>' +
-                        '<button  id="btnEliminar" data-id="' + data.id + '" type="button" class="btn btn-danger btn-icon-split btn-sm d-inline d-sm-none">' +
-                        '<span class="icon text-white-50"><i class="fas fa-trash"></i></span>' +
-                        '</button>' +
-                        '<span class="d-none d-sm-inline">' +
-                        '<button id="btnEditar" data-id="' + data.id + '" type="button" class="btn btn-info btn-icon-split btn-sm">' +
+                        '<span class="">' +
+                        '<button id="btnEditar" data-id="' + data.id + '" type="button" class="btn btn-info btn-icon-split btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditarUsuario">' +
                         '<span class="icon text-white-50"><i class="fas fa-pen"></i></span><span class="text">Editar</span>' +
                         '</button>' +
                         '<button  id="btnEliminar" data-id="' + data.id + '" type="button" class="btn btn-danger btn-icon-split btn-sm">' +
@@ -82,9 +76,9 @@ let eventos = function () {
         $("#vApellidoMaterno").val('');
         modalNuevoUsuario.show();
     });
-    
+
     $("#vNombres").click(function () {
-       
+
         var vDni = $('#vDNI').val();
         if (vDni.length !== 8) {
             Swal.fire({
@@ -133,7 +127,7 @@ let eventos = function () {
                         }
 
                     } else {
-                       // grabarInformacion(obj, vDni);
+                        // grabarInformacion(obj, vDni);
                         $("#vNombres").val(obj.NOMBRES);
                         $("#vApellidoPaterno").val(obj.APPAT);
                         $("#vApellidoMaterno").val(obj.APMAT);
@@ -219,7 +213,7 @@ let eventos = function () {
         $("#vApellidoPaternoEditar").val(data.vApellidoPaterno);
         $("#vApellidoMaternoEditar").val(data.vApellidoMaterno);
         $("#usuarioIDEditar").val(data.id);
-        modalEditarUsuario.show();
+        //modalEditarUsuario.show();
     };
 
     $("#btneditarUsuario").click(function () {

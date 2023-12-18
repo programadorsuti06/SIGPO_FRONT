@@ -20,5 +20,18 @@ namespace SISGEA_FRONT.Controllers
                 return RedirectToAction("Login", "Usuarios");
             }
         }
+
+        public ActionResult MetasFiscasxPeriodo()
+        {
+            if (Session["token"] != null)
+            {
+                ViewBag.Token = Session["token"];
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuarios");
+            }
+        }
     }
 }

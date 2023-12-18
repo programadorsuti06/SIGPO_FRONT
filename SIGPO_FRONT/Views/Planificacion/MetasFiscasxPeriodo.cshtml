@@ -1,0 +1,246 @@
+﻿
+@{
+    ViewBag.Title = "MetasFiscasxPeriodo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!--===================================
+=            METAS FISICAS            =
+====================================-->
+<!--====  TITULO  ====-->
+<div id="kt_app_toolbar" class="app-toolbar my-4">
+    <div id="kt_app_toolbar_container" class="app-container d-flex align-items-stretch">
+        <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
+            <div class="page-title d-flex flex-column gap-1 me-3">
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold mb-6">
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "Home")" class="text-green-title text-hover-danger">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="text-green-title fw-bold lh-1" style="padding-left:0.5rem">
+                        <i class="fas fa-chevron-right"></i>
+                        Planificación
+                    </li>
+                    <li class="text-green-title lh-1" style="padding-left:0.5rem">
+                        <i class="fas fa-chevron-right"></i>
+                        Metas físicas
+                    </li>
+                </ul>
+
+                <h4 class="page-heading d-flex flex-column justify-content-center text-green-title fw-bolder lh-0 mb-0">
+                    METAS FÍSICAS - PERIODO 2023
+                </h4>
+            </div>
+
+            <button id="btnAsignarUnidadMedida" type="button" class="btn btn-success justify-content-end">
+                <i class="fas fa-fw fa-plus"></i>
+                Nueva unidad de medida por Periodo
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+<!--====  LISTADO  ====-->
+<div class="col-12">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="card-title fw-bolder m-0">LISTADO DE METAS FÍSICAS POR PERIODO</h3>
+        </div>
+        <div class="card-body">
+            <table id="tablaMetasFisica" class="table table-sm">
+
+                <!--<thead>
+                    <tr>
+                        <th>Periodo</th>
+                        <th>Componente</th>
+                        <th>Acción</th>
+                        <th>Actividad</th>
+                        <th>Unidad de medida</th>
+                        <th>Meta</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>-->
+                <!-- Aquí agregarás las filas con los datos -->
+                <!--<tr>
+                    <td>2023</td>
+                    <td>Componente 1</td>
+                    <td>Acción 1</td>
+                    <td>Actividad</td>
+                    <td>Unidad 1</td>
+                    <td>5</td>
+                    <td>
+
+                        <button id="" type="button" class="btn btn-outline-primary justify-content-end" data-bs-toggle="modal" data-bs-target="#modalNuevaMetaFisica">
+                            <i class="fas fa-fw fa-plus"></i>
+                        </button>
+
+                        <button id="" type="button" class="btn btn-outline-warning justify-content-end">
+                            <i class="fas fa-fw fa-edit"></i>
+                        </button>
+                        <button id="" type="button" class="btn btn-outline-danger justify-content-end">
+                            <i class="fas fa-fw fa-trash-alt"></i>
+                        </button>
+
+                    </td>
+                </tr>-->
+                <!-- Agrega más filas según sea necesario -->
+                <!--</tbody>-->
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--==============================================
+=            MODAL NUEVA UM X PERIODO            =
+===============================================-->
+<div class="col-12">
+    <div class="modal fade" id="modalNuevaUMxPeriodo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalNuevaUMxPeriodo" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title pl-3">ASIGNAR UNIDAD DE MEDIDA POR PERIODO</h5>
+                    <button id="btnCmodalNuevaUMxPeriodo" type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fas fa-fw fa-times"></i></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-6">
+                            <div class="form-group">
+                                <label for="cmbPeriodoUM" class="form-label">Periodo</label>
+                                <select id="cmbPeriodoUM" class="form-select form-select-lg">
+                                    <option selected>Seleccione</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 mt-4">
+                        <div class="table-responsive">
+                            <table id="tablaAsignarMedida" class="table table-sm" style="width:100%;">
+                            </table>
+                        </div>
+                    </div>
+                    </div>
+
+                <div class="modal-footer">
+                    <button id="btnCmodalNuevaUMxPeriodo2" type="button" class="btn btn-light" ><i class="fas fa-fw fa-times"></i> Cerrar</button>
+                    <button id="btnGuardarAsignacion" type="button" class="btn btn-success" ><i class="fas fa-fw fa-save"></i> Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--===========================================================
+=            MODAL NUEVA META FISICA POR ACTIVIDAD            =
+============================================================-->
+<div class="col-12">
+    <div class="modal fade" id="modalNuevaMetaFisica" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalNuevaMetaFisica" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title pl-3">REGISTRAR METAS FÍSICAS POR ACTIVIDAD</h5>
+                    <button id="btnCmodalNuevaMetaFisica" type="button" class="btn-close" aria-label="Close"><i class="fas fa-fw fa-times"></i></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12">
+                            <div class="form-group">
+                                <label for="cmbDepartamento" class="form-label">DEPARTAMENTO</label>
+                                <select id="cmbDepartamento" class="form-select form-select-lg">
+                                    <option selected>Seleccione</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <div class="form-group">
+                                <label for="cmbProvincia" class="form-label">PROVINCIA</label>
+                                <select id="cmbProvincia" class="form-select form-select-lg">
+                                    <option selected>Seleccione</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <div class="form-group">
+                                <label for="cmbDistrito" class="form-label">DISTRITO</label>
+                                <select id="cmbDistrito" class="form-select form-select-lg">
+                                    <option selected>Seleccione</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-4">
+                            <div class="table-responsive">
+                                <table id="tablaActividades" class="table table-sm" style="width:100%;">
+                                </table>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnCmodalNuevaMetaFisica2" type="button" class="btn btn-light"><i class="fas fa-fw fa-times"></i> Cerrar</button>
+                    <button id="btnGuardarNuevo" type="button" class="btn btn-success"><i class="fas fa-fw fa-save"></i> Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal editar usuario -->
+<!-- ADD col-12 y revisar todo -->
+<div id="modalEditarUsuario" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Usuario</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="vUsuarioEditar" class="form-label">vUsuario</label>
+                        <input type="text" class="form-control" id="vUsuarioEditar">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="vCorreoEditar" class="form-label">vCorreo</label>
+                        <input type="text" class="form-control" id="vCorreoEditar">
+                    </div>
+                    <div class="col-12 mb-2"><hr /></div>
+                    <div class="col-md-3">
+                        <label for="vDNIEditar" class="form-label">DNI</label>
+                        <input type="text" class="form-control" id="vDNIEditar">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="vNombresEditar" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" id="vNombresEditar">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="vApellidoPaternoEditar" class="form-label">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="vApellidoPaternoEditar">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="vApellidoMaternoEditar" class="form-label">Apellido Materno</label>
+                        <input type="text" class="form-control" id="vApellidoMaternoEditar">
+                        <input type="hidden" id="usuarioIDEditar">
+                    </div>
+                </form>
+                <div class="mb-3">
+                    <button id="btneditarUsuario" type="button" class="btn btn-block btn-primary"><i class="fas fa-fw fa-save"></i> Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/Planificacion/MetasFisicas.js"></script>
+
