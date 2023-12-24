@@ -15,14 +15,16 @@ let eventos = function () {
     obj = {
         iCodProyecto: iCodProyecto
     };
-
+    //***************************************************************** */
     //BOTON ABRE MODLA PARA ASIGNAR UNIDADES DE MEDIDA A LAS ACTIVIDADES
+    /****************************************************************** */
     $("#btnAsignarUnidadMedida").click(function () {
         modalNuevaUMxPeriodo.show();
         CargarDatos();
         doTask('POST', "Planificacion/ObtenerListaComponentes/", obj, function (respuesta1) {
 
             const columnas = obtenerNodosFinales(respuesta1);
+            console.log(columnas);
 
             if ($.fn.dataTable.isDataTable('#tablaAsignarMedida')) {
                 tablaAsignarMedida.destroy();
@@ -119,11 +121,13 @@ let eventos = function () {
 
         });
     });
-
+    /******************************************************************* */
     //BOTON  GUARDAR UNIDADES DE MEDIDA ASIGNADAS
+    /********************************************************************/
     $('#btnGuardarAsignacion').on('click', function () {
 
         var datosGuardar = obtenerDatosParaGuardar();
+        
         obj = {
             iCodProyecto: iCodProyecto
         };
@@ -206,15 +210,37 @@ let eventos = function () {
 
                 },
                 aoColumns: [
-                    { "title": "iCodMetasFiscasxPerido", "bSortable": false, bVisible: false, data: 'iCodItem' },
-                    {"title": "ACTIVIDAD", "bSortable": false, "bVisible": true, "data": 'vNombreActividad'},
-                    { "title": "UNIDAD DE MEDIDA", "bSortable": false, bVisible: true, data: 'vNombreUnidadMedida' },
-                    
-                    
+                    { "title": "iCodMetasFiscasxPerido", "bSortable": false, "bVisible": false, data: 'iCodItem' },
+                    { "title": "ITEM", "bSortable": false, "data": 'vItem' },
+                    { "title": "iCodUnidadMedida ", "bSortable": false, "bVisible": false, data: 'iCodUnidadMedida' }
+                    { "title": "ACTIVIDAD", "bSortable": false,  "data": 'vNombreActividad'},
+                    { "title": "UNIDAD DE MEDIDA", "bSortable": false,  data: 'vNombreUnidadMedida' },
+                    { "title": "CANTIDAD", "bSortable": false, "defaultContent": ''}, 
+                ],
+                columnDefs: [
+                    {
+                        targets: 1, // Índice de la columna "ACTIVIDAD"
+                        width: "900px" // Establece el ancho a 70 píxeles
+                    },
+                    {
+                        targets: [2, 3], // Índices de las columnas "UNIDAD DE MEDIDA" y "CANTIDAD"
+                        width: "150px" // Establece el ancho a 150 píxeles para ambas columnas
+                    },
+                   
+                    {  targets: -1, // Índice de la columna donde quieres el input (en este caso, -1 es la última columna)
+                        render: function (data, type, full, meta) {
+                            // `data` contiene los datos de la fila actual, `full` contiene todos los datos de la fila
+                            return '<input class="text-center" style="width:80px;" type="text" id="input_' + full.iCodItem + '" value="">';
+                            // Aquí, `full.iCodItem` se utiliza para asignar un ID único a cada input
+                        }
+                    }
                 ]
 
 
+
             });
+
+           
         };
        
     });
@@ -283,6 +309,10 @@ function obtenerNodosFinales(datos) {
     return nodosFinales;
 }
 
+/*****************************************************************************
+//FUNCION APARA OBTENER LOS DATOS DE LA TBALA ASIGNACION DE UNIDAD DE MEDIDA * 
+ *****************************************************************************/
+
 function obtenerDatosParaGuardar() {
     var datosAGuardar = [];
     var filas = tablaAsignarMedida.rows().data();
@@ -290,8 +320,10 @@ function obtenerDatosParaGuardar() {
     filas.each(function (index, row) {
         var codigo = index.codigo;
      
-        var descripcion = index.dato; // Supongo que 'dato' contiene la descripción
+        var descripcion = index.dato; // 'dato' contiene la descripción
+        var vItem = index.vItem;
         iCodPeriodo = $("#cmbPeriodoUM").val();
+
         // Obtener el valor seleccionado del combo
         var valorCombo = seleccionesCombo[codigo] || 0; // Si no hay selección, asigna 0 por defecto
 
@@ -299,6 +331,7 @@ function obtenerDatosParaGuardar() {
         var objeto = {
             "iCodPeriodo": iCodPeriodo,
             "iCodItem": codigo,
+            "vItem":vItem,
             "vDescripcion": descripcion,
             "iCodUnidadMedida": valorCombo,
             "iCodUsuarioRegistra": 1
@@ -311,7 +344,46 @@ function obtenerDatosParaGuardar() {
     return datosAGuardar;
 }
 
+/*****************************************************************************
+//FUNCION PARA OBTENER LOS DATOS DE LA TABLA  ACTIVIDADES * 
+ *****************************************************************************/
+function obtenerDatosActividades() {
+    var datosActividades= [];
+    var filas = tablaActividades.rows().data();
+
+    console.log(filas);
+
+    filas.each(function (index, row) {
+        var codigo = index.codigo;
+
+        var descripcion = index.dato; // 'dato' contiene la descripción
+        var vItem = index.vItem;
+        iCodPeriodo = $("#cmbPeriodoUM").val();
+
+        // Obtener el valor seleccionado del combo
+        var valorCombo = seleccionesCombo[codigo] || 0; // Si no hay selección, asigna 0 por defecto
+
+        // Crear el objeto con el orden específico de los datos
+        var objeto = {
+            "iCodPeriodo": iCodPeriodo,
+            "iCodItem": codigo,
+            "vItem": vItem,
+            "vDescripcion": descripcion,
+            "iCodUnidadMedida": valorCombo,
+            "iCodUsuarioRegistra": 1
+
+        };
+
+        datosAGuardar.push(objeto);
+    });
+
+    return datosAGuardar;
+}
+
+
+/*************************************** */
 // CArGAR DATOS DE COMBOS
+/**************************************** */
 function CargarDatos() {
     var obj = {};
     $('#cmbPeriodoUM').empty();
@@ -325,6 +397,10 @@ function CargarDatos() {
 
     $('#cmbDepartamento').empty();
     $('#cmbDepartamento').append("<option value='0'>Seleccione</option>");
+    $('#cmbProvincia').empty();
+    $('#cmbProvincia').append("<option value='0'>Seleccione</option>");
+    $('#cmbDistrito').empty();
+    $('#cmbDistrito').append("<option value='0'>Seleccione</option>");
     var obj2 = {
         iCodProyecto: iCodProyecto
     }
@@ -335,9 +411,6 @@ function CargarDatos() {
         });
 
     });
-
-    
-
 };
 let ui = function () {
 };

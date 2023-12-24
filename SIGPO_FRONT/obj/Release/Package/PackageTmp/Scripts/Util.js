@@ -1,8 +1,8 @@
-﻿let baseUrlApi = 'https://localhost:7123/';
-let baseUrlMvc = 'https://localhost:44334/';
+﻿//let baseUrlApi = 'https://localhost:7123/';
+//let baseUrlMvc = 'https://localhost:44334/';
 
-//let baseUrlApi = 'https://qa.agrorural.gob.pe/SIGPO_API/';
-//let baseUrlMvc = 'https://qa.agrorural.gob.pe/SIGPO_FRONT/';
+let baseUrlApi = 'https://qa.agrorural.gob.pe/SIGPO_API/';
+let baseUrlMvc = 'https://qa.agrorural.gob.pe/SIGPO_FRONT/';
 
 let dataTableLanguage = {
     processing: "Procesando...",
@@ -156,4 +156,7 @@ function doTaskFile(verbo, controlador, dataSend, callbackOK, callbackError = nu
             });
             HoldOn.close();
         });
+
+
+    
 }

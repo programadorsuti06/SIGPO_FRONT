@@ -1,126 +1,219 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Usuarios</h1>
-</div>
+<!--==============================
+=            USUARIOS            =
+===============================-->
+<!--====  TITULO  ====-->
+<div id="kt_app_toolbar" class="app-toolbar my-4">
+    <div id="kt_app_toolbar_container" class="app-container d-flex align-items-stretch">
+        <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
+            <div class="page-title d-flex flex-column gap-1 me-3">
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold mb-6">
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "Home")" class="text-green-title text-hover-danger">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="text-green-title fw-bold lh-1" style="padding-left:0.5rem">
+                        <i class="fas fa-chevron-right"></i>
+                        Mantenimiento
+                    </li>
+                    <li class="text-green-title lh-1" style="padding-left:0.5rem">
+                        <i class="fas fa-chevron-right"></i>
+                        Usuarios
+                    </li>
+                </ul>
 
-<div class="row bt-3 mb-3">
-    <div class="col-12 text-right">
-        <button id="btnAgregarNuevo" type="button" class="btn btn-primary"><i class="fas fa-fw fa-plus"></i> Agregar</button>
+                <h4 class="page-heading d-flex flex-column justify-content-center text-green-title fw-bolder lh-0 mb-0">
+                    USUARIOS
+                </h4>
+            </div>
+
+            <button type="button" class="btn btn-success justify-content-end" data-bs-toggle="modal" data-bs-target="#modalNuevoUsuario">
+                <i class="fas fa-fw fa-plus"></i>
+                Nuevo usuario
+            </button>
+        </div>
     </div>
 </div>
 
-<!-- Content Row -->
-<div class="row">
-    <div class="col-12">
-        <div class="card mb-4 shadow-lg table-responsive-sm">
-            <div class="card-body ">
-                <table id="tablaUsuarios" class="table table-sm table-bordered table-striped ">
-                   
+<!--====  LISTADO  ====-->
+<div class="col-12">
+    <div class="card b-0">
+        <div class="card-header">
+            <h3 class="card-title fw-bolder m-0">Listado de usuarios</h3>
+        </div>
+        <div class="card-body pt-1">
+            <div class="table-responsive">
+                <table id="tablaUsuarios" class="table table-sm">
+
                 </table>
             </div>
         </div>
     </div>
 </div>
 
-<!-- modal nuevo usuario -->
-<div id="modalNuevoUsuario" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+
+
+<!--=========================================
+=            MODAL NUEVO USUARIO            =
+==========================================-->
+<div class="modal fade" id="modalNuevoUsuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalNuevoUsuario" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Nuevo Usuario</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title pl-3" id="modalNuevoUsuario">Registrar usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-fw fa-times"></i></button>
             </div>
-
             <div class="modal-body">
-                <form class="row g-3 mb-3">
-
-
-                    <div class="col-md-3">
+                <div class="row">
+                    <div class="form-group">
                         <label for="vDNI" class="form-label">DNI</label>
-                        <input type="text" class="form-control" id="vDNI">
+                        <input type="text" class="form-control form-control-lg" id="vDNI" placeholder="">
                     </div>
-                    <div class="col-md-3">
+                    <div class="form-group">
                         <label for="vNombres" class="form-label">Nombres</label>
-                        <input type="text" class="form-control" id="vNombres">
+                        <input type="text" class="form-control form-control-lg" id="vNombres">
                     </div>
-                    <div class="col-md-3">
+                    <div class="form-group">
                         <label for="vApellidoPaterno" class="form-label">Apellido Paterno</label>
-                        <input type="text" class="form-control" id="vApellidoPaterno">
+                        <input type="text" class="form-control form-control-lg" id="vApellidoPaterno">
                     </div>
-                    <div class="col-md-3">
+                    <div class="form-group">
                         <label for="vApellidoMaterno" class="form-label">Apellido Materno</label>
-                        <input type="text" class="form-control" id="vApellidoMaterno">
+                        <input type="text" class="form-control form-control-lg" id="vApellidoMaterno">
                     </div>
-
-                    <div class="col-md-6">
-                        <label for="vCorreo" class="form-label">vCorreo</label>
-                        <input type="text" class="form-control" id="vCorreo">
+                    <div class="form-group">
+                        <label for="vCorreo" class="form-label">Correo institucional</label>
+                        <input type="email" class="form-control form-control-lg" id="vCorreo">
                     </div>
-                    <div class="col-md-6">
-                        <label for="vUsuario" class="form-label">vUsuario</label>
-                        <input type="text" class="form-control" id="vUsuario">
+                    <div class="form-group">
+                        <label for="vUsuario" class="form-label">Nombre de usuario</label>
+                        <input type="text" class="form-control form-control-lg" id="vUsuario">
                     </div>
-                    <div class="col-12 mb-2"><hr /></div>
-                </form>
-                <div class="mb-3">
-                    <button id="btnGuardarNuevo" type="button" class="btn btn-block btn-primary"><i class="fas fa-fw fa-save"></i> Guardar</button>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal"><i class="fas fa-fw fa-times"></i> Cerrar</button>
+                <button id="btnGuardarNuevo" type="button" class="btn btn-success"><i class="fas fa-fw fa-save"></i> Guardar</button>
             </div>
         </div>
     </div>
 </div>
-<!-- /modal nuevo usuario -->
-<!-- modal editar usuario -->
-<div id="modalEditarUsuario" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+
+<!--=========================================
+=            MODAL EDITAR USUARIO           =
+==========================================-->
+<div class="modal fade" id="modalEditarUsuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEditarUsuario" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered  modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Editar Usuario</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title pl-3" id="modalNuevoUsuario">Editar usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-fw fa-times"></i></button>
             </div>
 
             <div class="modal-body">
-                <form class="row g-3 mb-3">
-                    <div class="col-md-6">
-                        <label for="vUsuarioEditar" class="form-label">vUsuario</label>
-                        <input type="text" class="form-control" id="vUsuarioEditar">
+                <div class="row">
+                    <div class="form-group">
+                        <label for="vUsuarioEditar" class="form-label">Usuario</label>
+                        <input type="text" class="form-control form-control-lg" id="vUsuarioEditar" placeholder="">
                     </div>
-                    <div class="col-md-6">
-                        <label for="vCorreoEditar" class="form-label">vCorreo</label>
-                        <input type="text" class="form-control" id="vCorreoEditar">
+
+                    <div class="form-group">
+                        <label for="vCorreoEditar" class="form-label">Correo</label>
+                        <input type="text" class="form-control form-control-lg" id="vCorreoEditar" placeholder="">
                     </div>
+
                     <div class="col-12 mb-2"><hr /></div>
-                    <div class="col-md-3">
+
+                    <div class="form-group">
                         <label for="vDNIEditar" class="form-label">DNI</label>
-                        <input type="text" class="form-control" id="vDNIEditar">
+                        <input type="text" class="form-control form-control-lg" id="vDNIEditar" placeholder="">
                     </div>
-                    <div class="col-md-3">
+
+                    <div class="form-group">
                         <label for="vNombresEditar" class="form-label">Nombres</label>
-                        <input type="text" class="form-control" id="vNombresEditar">
+                        <input type="text" class="form-control form-control-lg" id="vNombresEditar" placeholder="">
                     </div>
-                    <div class="col-md-3">
-                        <label for="vApellidoPaternoEditar" class="form-label">Apellido Paterno</label>
-                        <input type="text" class="form-control" id="vApellidoPaternoEditar">
+
+                    <div class="form-group">
+                        <label for="vApellidoPaternoEditar" class="form-label">Apellido paterno</label>
+                        <input type="text" class="form-control form-control-lg" id="vApellidoPaternoEditar" placeholder="">
                     </div>
-                    <div class="col-md-3">
-                        <label for="vApellidoMaternoEditar" class="form-label">Apellido Materno</label>
-                        <input type="text" class="form-control" id="vApellidoMaternoEditar">
-                        <input type="hidden" id="usuarioIDEditar">
+
+                    <div class="form-group">
+                        <label for="vApellidoPaternoEditar" class="form-label">Apellido materno</label>
+                        <input type="text" class="form-control form-control-lg" id="vApellidoMaternoEditar" placeholder="">
                     </div>
-                </form>
-                <div class="mb-3">
-                    <button id="btneditarUsuario" type="button" class="btn btn-block btn-primary"><i class="fas fa-fw fa-save"></i> Guardar</button>
+                    <input type="hidden" id="usuarioIDEditar">
                 </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal"><i class="fas fa-fw fa-times"></i> Cerrar</button>
+                <button id="btneditarUsuario" type="button" class="btn btn-success"><i class="fas fa-fw fa-save"></i> Guardar</button>
             </div>
         </div>
     </div>
 </div>
-<!-- /modal editar usuario -->
+
+<!--=========================================
+=            MODAL ADD ACTIVIDADES          =
+==========================================-->
+<div class="modal fade" id="modalNuevaMetaFisica" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalNuevaMetaFisica" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title pl-3" id="modalNuevaMetaFisica">Agregar meta física</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-fw fa-times"></i></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="vDNI" class="form-label">DNI</label>
+                            <input type="text" class="form-control form-control-lg" id="vDNI" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="vNombres" class="form-label">Nombres</label>
+                            <input type="text" class="form-control form-control-lg" id="vNombres">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="vApellidoPaterno" class="form-label">Apellido Paterno</label>
+                        <input type="text" class="form-control form-control-lg" id="vApellidoPaterno">
+                    </div>
+                    <div class="form-group">
+                        <label for="vApellidoMaterno" class="form-label">Apellido Materno</label>
+                        <input type="text" class="form-control form-control-lg" id="vApellidoMaterno">
+                    </div>
+                    <div class="form-group">
+                        <label for="vCorreo" class="form-label">Correo institucional</label>
+                        <input type="email" class="form-control form-control-lg" id="vCorreo">
+                    </div>
+                    <div class="form-group">
+                        <label for="vUsuario" class="form-label">Nombre de usuario</label>
+                        <input type="text" class="form-control form-control-lg" id="vUsuario">
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal"><i class="fas fa-fw fa-times"></i> Cerrar</button>
+                <button id="btnGuardarNuevo" type="button" class="btn btn-success"><i class="fas fa-fw fa-save"></i> Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="~/Scripts/Usuarios/Usuarios.js"></script>
